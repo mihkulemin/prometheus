@@ -1621,6 +1621,7 @@ func openBlocks(l log.Logger, dir string, loaded []*Block, chunkPool chunkenc.Po
 		// See if we already have the block in memory or open it otherwise.
 		block, open := getBlock(loaded, meta.ULID)
 		if !open {
+			level.Info(l).Log("msg", "opening block", "dir", bDir)
 			block, err = OpenBlock(l, bDir, chunkPool)
 			if err != nil {
 				corrupted[meta.ULID] = err
